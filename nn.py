@@ -41,6 +41,15 @@ class Network(object):
             a = sigmoid(np.dot(w, a)+b)
         return a
 
+    # Reorder weights and biases
+    def reorder(self, perm):
+        # Zip the lists together
+        zipped_lists = zip(perm, self.weights, self.biases)
+        # Sort based on perm
+        sorted_lists = sorted(zipped_lists, key=lambda x: x[0])
+        # Unzip the sorted lists
+        perm, self.weights, self.biases = zip(*sorted_lists)
+
     def SGD(self, training_data, epochs, mini_batch_size, eta,
             test_data=None):
         """Train the neural network using mini-batch stochastic
