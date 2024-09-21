@@ -4,6 +4,8 @@ import torch.nn as nn
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # numpy
 import numpy as np
