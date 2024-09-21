@@ -123,3 +123,4 @@ us==3.1.1
 wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1704731205417/work
 xyzservices==2024.6.0
 zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1718013267051/work
+git+https://github.com/gregversteeg/NPEET.git
