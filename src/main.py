@@ -10,19 +10,7 @@ from neural_net import NeuralNet
 # Define the model architecture with 10 layers
 input_size = 28 * 28  # MNIST images are 28x28 pixels
 output_size = 10      # 10 classes for digits 0-9
-model = NeuralNet(input_size, output_size)
-
-# Adding 10 layers to the network
-model.add_layer('input', nn.Linear(input_size, 64))   # Layer 1
-model.add_layer('relu1', nn.ReLU())                   # Layer 2
-model.add_layer('linear2', nn.Linear(64, 128))        # Layer 3
-model.add_layer('relu2', nn.ReLU())                   # Layer 4
-model.add_layer('linear3', nn.Linear(128, 256))       # Layer 5
-model.add_layer('relu3', nn.ReLU())                   # Layer 6
-model.add_layer('linear4', nn.Linear(256, 128))       # Layer 7
-model.add_layer('relu4', nn.ReLU())                   # Layer 8
-model.add_layer('linear5', nn.Linear(128, 64))        # Layer 9
-model.add_layer('output', nn.Linear(64, output_size)) # Layer 10
+model = NeuralNet.create_model(10, input_size=input_size, output_size=output_size)
 
 # Define transformations for the MNIST dataset
 transform = transforms.Compose([
