@@ -1,2 +1,6 @@
-# Analysing Ideal Skip Connections
-Looking at popular NN architecures like the Resnet and trying to figure out ideal skipping configurations using random walks
+# Analyzing Ideal Skip Connections in Neural Networks Using Random Walks
+## Introduction
+This project investigates the use of skip connections in neural networks, specifically focusing on optimizing the configurations of these connections using random walks. Skip connections, as popularized in architectures like ResNet, have shown to significantly enhance model performance by mitigating vanishing gradient problems and enabling deeper network architectures. However, the design of these connections can be complex and is often manually defined. The goal of this project is to explore if and how random walks can help discover ideal skip connection configurations in a systematic way.
+
+## Motivation
+ResNet and other modern architectures have demonstrated the power of skip connections, but determining the optimal configuration of these connections (e.g., which layers to connect) remains largely an empirical process. The random walk approach seeks to automate and potentially optimize this process by modeling the neural network as a graph and exploring different skip connection patterns through probabilistic techniques.
