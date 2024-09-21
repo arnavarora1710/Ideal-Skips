@@ -89,7 +89,7 @@ def find_optimal_configurations():
 
     L = gen_learning_array(model_weights)
 
-    graph = computeMatrix(L, model_weights)
+    graph = computeMatrix(L)
 
     choicer = [x for x in range(1, LAYERS - 1)]
     start = np.random.choice(choicer)
