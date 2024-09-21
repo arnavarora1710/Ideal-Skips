@@ -19,14 +19,14 @@ from random_walk import random_walk_with_updates
 # Global Vars
 LAYERS = 10
 STEPS = 3
-EPOCHS_INIT = 5
+EPOCHS_INIT = 1
 EPOCHS_TRAIN = 5
 
 # Define the model architecture with 10 layers
 input_size = 28 * 28  # MNIST images are 28x28 pixels
 output_size = 10      # 10 classes for digits 0-9
 model = NeuralNet(input_size=input_size, output_size=output_size)
-model.create_model(n_layers=LAYERS, input_size=input_size, output_size=output_size)
+model.create_model(n_layers=LAYERS)
 
 # Define transformations for the MNIST dataset
 transform = transforms.Compose([
@@ -97,12 +97,13 @@ def find_optimal_configurations():
 
     L = gen_learning_array(model_weights)
 
-    graph = computeMatrix(L, np.array(model_weights))
+    graph = computeMatrix(L, model_weights)
 
     choicer = [x for x in range(LAYERS)]
     start = np.random.choice(choicer)
     result = random_walk_with_updates(LAYERS, start, graph, STEPS)
     for stuff in result:
+        print(stuff)
         model.add_skip_connection(stuff[0], stuff[1])
     train_model(model, train_loader, criterion, optimizer, num_epochs=EPOCHS_TRAIN)
 
