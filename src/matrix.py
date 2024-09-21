@@ -18,21 +18,22 @@ def findWt(wt_i, wt_j):
 def computeMatrix(learningArray, weights):
     # define the transition matrix
     n = len(learningArray)
-    matrix = [[0] * n] * n
-
+    matrix = [[0 for i in range(n)] for j in range(n)]
     # Compute the prefix sum of the learningMatrix
-    prefixLearning = [0] * n
+    prefixLearning = [0 for _ in range(n)]
     prefixLearning[0] = learningArray[0]
 
     for i in range(1, n):
         prefixLearning[i] = prefixLearning[i - 1] + learningArray[i]
 
     # Fill the indices in the graph 
-    for i in range(0, n):
+    for i in range(n):
         for j in range(i + 1, n):
             matrix[i][j] = ((findWt(weights[i], weights[j])) / float(j - i)) / sumBtw(prefixLearning, i, j) 
             matrix[i][j] = max(0, matrix[i][j])
             matrix[i][j] = min(1, matrix[i][j])
-        if sum(matrix[i]) != 0:
-            matrix[i] = [float(j) / sum(matrix[i]) for j in matrix[i]]
+        sum_mat = sum(matrix[i])
+        if sum_mat != 0 and sum_mat != 1:
+            for j in range(i + 1, n):
+                matrix[i][j] /= float(sum_mat)
     return matrix

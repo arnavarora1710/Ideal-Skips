@@ -17,9 +17,9 @@ from random_walk import random_walk_with_updates
 # Define the NeuralNet class (already defined in the previous response)
 
 # Global Vars
-LAYERS = 10
-STEPS = 3
-EPOCHS_INIT = 1
+LAYERS = 100
+STEPS = 5
+EPOCHS_INIT = 0
 EPOCHS_TRAIN = 5
 
 # Define the model architecture with 10 layers
@@ -94,12 +94,14 @@ def find_optimal_configurations():
         weights = model.get_layer_weights(layer_name)
         if weights is not None:
             model_weights.append(weights)
+    model_weights.pop()
+    model_weights.pop(0)
 
     L = gen_learning_array(model_weights)
 
     graph = computeMatrix(L, model_weights)
 
-    choicer = [x for x in range(LAYERS)]
+    choicer = [x for x in range(1, LAYERS - 1)]
     start = np.random.choice(choicer)
     result = random_walk_with_updates(LAYERS, start, graph, STEPS)
     for stuff in result:
