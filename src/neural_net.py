@@ -109,7 +109,6 @@ class NeuralNet(nn.Module):
             layer = self.layers[layer_name]
             if hasattr(layer, 'weight'):
                 return layer.weight.data
-        # print(f"Layer '{layer_name}' does not have weights or does not exist.")
         return None
 
     def create_model(self, n_layers):

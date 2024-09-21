@@ -16,17 +16,14 @@ from learning_array import gen_learning_array
 from matrix import computeMatrix
 from random_walk import random_walk_with_updates
 
-# Define the NeuralNet class (already defined in the previous response)
-
 # Global Vars
 LAYERS = 100
 STEPS = 5
 EPOCHS_INIT = 0
 EPOCHS_TRAIN = 5
 
-# Define the model architecture with 10 layers
-input_size = 28 * 28  # MNIST images are 28x28 pixels
-output_size = 10      # 10 classes for digits 0-9
+input_size = 28 * 28 
+output_size = 10
 model = NeuralNet(input_size=input_size, output_size=output_size)
 model.create_model(n_layers=LAYERS)
 
@@ -54,7 +51,7 @@ def train_model(model, train_loader, criterion, optimizer, num_epochs=5):
     for epoch in range(num_epochs):
         total_loss = 0
         for inputs, targets in train_loader:
-            inputs = inputs.view(inputs.size(0), -1)  # Flatten the images
+            inputs = inputs.view(inputs.size(0), -1) # Flatten the images
             optimizer.zero_grad()
             outputs = model(inputs)
             loss = criterion(outputs, targets)
@@ -70,7 +67,7 @@ def evaluate_model(model, test_loader, criterion):
     correct = 0
     with torch.no_grad():
         for inputs, targets in test_loader:
-            inputs = inputs.view(inputs.size(0), -1)  # Flatten the images
+            inputs = inputs.view(inputs.size(0), -1) # Flatten the images
             outputs = model(inputs)
             loss = criterion(outputs, targets)
             total_loss += loss.item()
@@ -78,15 +75,6 @@ def evaluate_model(model, test_loader, criterion):
             correct += pred.eq(targets.view_as(pred)).sum().item()
     accuracy = correct / len(test_loader.dataset)
     print(f"Test Loss: {total_loss / len(test_loader)}, Accuracy: {accuracy * 100:.2f}%")
-
-# Train the model
-#train_model(model, train_loader, criterion, optimizer, num_epochs=EPOCHS_INIT)
-
-# Evaluate the model
-#evaluate_model(model, test_loader, criterion)
-
-# Test and print the weights of each layer
-# print("\nWeights of each layer:")
 
 def find_optimal_configurations():
     train_model(model, train_loader, criterion, optimizer, num_epochs=EPOCHS_INIT)
