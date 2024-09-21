@@ -112,16 +112,12 @@ class NeuralNet(nn.Module):
         print(f"Layer '{layer_name}' does not have weights or does not exist.")
         return None
 
-    def create_model(self, n_layers, input_size, output_size):
-        model = NeuralNet(input_size, output_size)
-        model.add_layer('input', nn.Linear(input_size, 64))   # Layer 1
+    def create_model(self, n_layers):
+        self.add_layer('input', nn.Linear(self.input_size, 64))
 
         # hidden layers
         for i in range(1, n_layers + 1):
-            # Adding 10 layers to the network
-            model.add_layer(f'relu{i}', nn.ReLU())                   # Layer 2
-            model.add_layer(f'linear{i}', nn.Linear(64, 64))        # Layer 3
+            self.add_layer(f'relu{i}', nn.ReLU())
+            self.add_layer(f'linear{i}', nn.Linear(64, 64))
 
-        model.add_layer('output', nn.Linear(64, output_size)) # Layer 10
-
-        return model
+        self.add_layer('output', nn.Linear(64, self.output_size))
