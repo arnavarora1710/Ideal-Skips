@@ -120,7 +120,7 @@ class NeuralNet(nn.Module):
         for i in range(1, n_layers + 1):
             # Adding 10 layers to the network
             model.add_layer(f'relu{i}', nn.ReLU())                   # Layer 2
-            model.add_layer(f'linear{i}', nn.Linear(64, 128))        # Layer 3
+            model.add_layer(f'linear{i}', nn.Linear(64, 64))        # Layer 3
 
         model.add_layer('output', nn.Linear(64, output_size)) # Layer 10
 
