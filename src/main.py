@@ -12,12 +12,15 @@ import numpy as np
 from neural_net import NeuralNet
 from learning_array import gen_learning_array
 from matrix import computeMatrix
+from random_walk import random_walk_with_updates
 
 # Define the NeuralNet class (already defined in the previous response)
 
 # Global Vars
 LAYERS = 10
+STEPS = 3
 EPOCHS_INIT = 5
+EPOCHS_TRAIN = 5
 
 # Define the model architecture with 10 layers
 input_size = 28 * 28  # MNIST images are 28x28 pixels
@@ -84,18 +87,24 @@ def evaluate_model(model, test_loader, criterion):
 # print("\nWeights of each layer:")
 
 def find_optimal_configurations():
+    train_model(model, train_loader, criterion, optimizer, num_epochs=EPOCHS_INIT)
 
-    for epoch in range(EPOCHS_INIT):
-        train_model(model, train_loader, criterion, optimizer, num_epochs=EPOCHS_INIT)
+    model_weights = []
+    for layer_name in model.layers.keys():
+        weights = model.get_layer_weights(layer_name)
+        if weights is not None:
+            model_weights.append(weights)
 
-        model_weights = []
-        for layer_name in model.layers.keys():
-            weights = model.get_layer_weights(layer_name)
-            if weights is not None:
-                model_weights.append(weights)
+    L = gen_learning_array(model_weights)
 
-        L = gen_learning_array(model_weights)
+    graph = computeMatrix(L, np.array(model_weights))
 
-        graph = computeMatrix(L, np.array(model_weights))
+    choicer = [x for x in range(LAYERS)]
+    start = np.random.choice(choicer)
+    result = random_walk_with_updates(LAYERS, start, graph, STEPS)
+    for stuff in result:
+        model.add_skip_connection(stuff[0], stuff[1])
+    train_model(model, train_loader, criterion, optimizer, num_epochs=EPOCHS_TRAIN)
 
-        start = np.random.choice()
+find_optimal_configurations()
+evaluate_model(model, test_loader, criterion)
