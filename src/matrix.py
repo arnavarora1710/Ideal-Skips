@@ -7,10 +7,6 @@ def sigmoid(z):
 # Goal of the function is to fill in the elements of the transition matrix
 def computeMatrix(learningArray):
     n = len(learningArray)
-    # learningArray = [sigmoid(x) for x in learningArray]
-    # learningArray = preprocessing.normalize([learningArray], norm = 'l1')[0]
-    # learningArray[0] += 1 - sum(learningArray)
-    # print(sum(learningArray))
     matrix = [[0 for i in range(n)] for j in range(n)]
     for i in range(n - 1):
         matrix[i][i + 1] = learningArray[i]; 
