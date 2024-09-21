@@ -105,9 +105,9 @@ class NeuralNet(nn.Module):
         :param layer_name: The name of the layer whose weights are to be retrieved
         :return: Weights of the layer as a tensor, or None if the layer has no weights
         """
-        layer = self.layers.get(layer_name, None)
-        if layer and hasattr(layer, 'weight'):
-            return layer.weight.data
-        else:
-            print(f"Layer '{layer_name}' does not have weights or does not exist.")
-            return None
+        if layer_name in self.layers:
+            layer = self.layers[layer_name]
+            if hasattr(layer, 'weight'):
+                return layer.weight.data
+        print(f"Layer '{layer_name}' does not have weights or does not exist.")
+        return None
