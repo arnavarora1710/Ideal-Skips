@@ -11,7 +11,7 @@ from neural_net import NeuralNet
 input_size = 28 * 28  # MNIST images are 28x28 pixels
 output_size = 10      # 10 classes for digits 0-9
 model = NeuralNet(input_size=input_size, output_size=output_size)
-model.create_model(n_layers=10, input_size=input_size, output_size=output_size)
+model = model.create_model(n_layers=10, input_size=input_size, output_size=output_size)
 
 # Define transformations for the MNIST dataset
 transform = transforms.Compose([
