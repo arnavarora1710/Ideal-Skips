@@ -35,11 +35,12 @@ def random_walk_with_updates(n, start, transition_matrix, steps):
         edge = [start, choice]
         for c1 in range(-WINDOW_SIZE, WINDOW_SIZE + 1):
             for c2 in range(-WINDOW_SIZE, WINDOW_SIZE + 1):
-                i = edge[0]
-                k = i + c1
-                j = edge[1]
-                l = j + c2
-                if valid(k, l, N, M):
-                    transition_matrix[k][l] = update(i, j, k, l, transition_matrix[k][l])
+                if c1 != 0 and c2 != 0:
+                    i = edge[0]
+                    k = i + c1
+                    j = edge[1]
+                    l = j + c2
+                    if valid(k, l, N, M):
+                        transition_matrix[k][l] = update(i, j, k, l, transition_matrix[k][l])
         start = choice
     return result
