@@ -11,7 +11,7 @@ def simple_random_walk(n, start, transition_matrix, steps):
         start = choice
     return result
 
-WINDOW_SIZE = 10
+WINDOW_SIZE = 3
 
 # define a distance metric to penalize jumps close to each other
 # dont want to skip i->j and i+1->j+1 etc
@@ -19,7 +19,7 @@ def update(i, j, k, l, p_kl):
     # now need to convert to prob
     # TODO: test with other ways to convert except for sigmoid
     euclidean_dist = np.sqrt((k - i) * (k - i) + (l - j) * (l - j))
-    return max(0, p_kl - np.sigmoid(euclidean_dist))
+    return max(0, p_kl - (1 - np.sigmoid(euclidean_dist)))
 
 def valid(i, j, n, m):
     return i >= 0 and j >= 0 and i < n and j < m
