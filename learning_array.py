@@ -7,7 +7,6 @@ def gen_learning_array(weight_matrices):
     # L[i] = learning between i -> i + 1
     N = len(weight_matrices)
     L = [0.0] * (N - 1)
-    P = [0.0] * (N - 1)
     scaler = MinMaxScaler()
     for i in range(N - 1):
         out1 = weight_matrices[i]
@@ -19,8 +18,4 @@ def gen_learning_array(weight_matrices):
         # compute mutual information gain between layer i and layer i + 1
         mi = ee.mi(out1_np, out2_np)
         L[i] = mi
-        if i != 0:
-            P[i] = P[i - 1] + L[i]
-        else:
-            P[i] = L[i]
-    return L, P
+    return L
